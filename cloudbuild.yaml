@@ -1,7 +1,7 @@
 #Fichier de config CloudBuild
 steps:
-- name: 'gcr.io/cloud-builders/mvn'
-  args: ['install']
+#- name: 'gcr.io/cloud-builders/mvn'
+#  args: ['install']
 # Build the container image
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'build', '-f', 'src/main/docker/Dockerfile.multistage', '-t', 'gcr.io/$PROJECT_ID/poc-json-quickstart', '.' ]
@@ -11,9 +11,8 @@ steps:
 # Deploy container image to Cloud Run
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['run', 'deploy', 'ws-pedigree-service', '--image', 'gcr.io/$PROJECT_ID/poc-json-quickstart', '--region', 'europe-west1', '--platform', 'managed', '--allow-unauthenticated']
-options:
- machineType: 'N1_HIGHCPU_8'
-options:
- diskSizeGb: 200
 images:
 - 'gcr.io/$PROJECT_ID/poc-json-quickstart'
+options:
+ machineType: 'N1_HIGHCPU_8'
+ diskSizeGb: 200

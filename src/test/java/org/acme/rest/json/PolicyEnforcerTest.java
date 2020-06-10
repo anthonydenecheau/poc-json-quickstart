@@ -6,6 +6,7 @@ import org.keycloak.representations.AccessTokenResponse;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
+import javax.ws.rs.core.MediaType;
 
 @ExtendWith(KeycloakServer.class)
 @QuarkusTest
@@ -65,7 +66,7 @@ public class PolicyEnforcerTest {
 
     @Test
     public void testListFruits() {
-        given()
+        RestAssured.given()
                 .when().get("/api/public/fruits")
                 .then()
                 .statusCode(200)
@@ -76,7 +77,7 @@ public class PolicyEnforcerTest {
 
     @Test
     public void testAddFruits() {
-        given()
+        RestAssured.given()
                 .body("{\"name\": \"Pear\", \"description\": \"Winter fruit\"}")
                 .header("Content-Type", MediaType.APPLICATION_JSON)
                 .when()
@@ -87,7 +88,7 @@ public class PolicyEnforcerTest {
                         "name", containsInAnyOrder("Apple", "Pineapple", "Pear"),
                         "description", containsInAnyOrder("Winter fruit", "Tropical fruit", "Winter fruit"));
 
-        given()
+        RestAssured.given()
                 .body("{\"name\": \"Pear\", \"description\": \"Winter fruit\"}")
                 .header("Content-Type", MediaType.APPLICATION_JSON)
                 .when()
@@ -101,7 +102,7 @@ public class PolicyEnforcerTest {
 
     @Test
     public void testListLegumes() {
-        given()
+        RestAssured.given()
                 .when().get("/api/public/legumes")
                 .then()
                 .statusCode(200)

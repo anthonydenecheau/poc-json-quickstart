@@ -64,6 +64,7 @@ public class PolicyEnforcerTest {
                 .as(AccessTokenResponse.class).getToken();
     }
 
+/*
     @Test
     public void testListFruits() {
         RestAssured.given()
@@ -110,5 +111,5 @@ public class PolicyEnforcerTest {
                         "name", containsInAnyOrder("Carrot", "Zucchini"),
                         "description", containsInAnyOrder("Root vegetable, usually orange", "Summer squash"));
     }
-
+*/
 }

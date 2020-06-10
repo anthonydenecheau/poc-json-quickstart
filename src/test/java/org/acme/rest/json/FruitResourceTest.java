@@ -16,7 +16,7 @@ public class FruitResourceTest {
     @Test
     public void testList() {
         given()
-                .when().get("/fruits")
+                .when().get("/api/public/fruits")
                 .then()
                 .statusCode(200)
                 .body("$.size()", is(2),
@@ -30,7 +30,7 @@ public class FruitResourceTest {
                 .body("{\"name\": \"Pear\", \"description\": \"Winter fruit\"}")
                 .header("Content-Type", MediaType.APPLICATION_JSON)
                 .when()
-                .post("/fruits")
+                .post("/api/public/fruits")
                 .then()
                 .statusCode(200)
                 .body("$.size()", is(3),
@@ -41,7 +41,7 @@ public class FruitResourceTest {
                 .body("{\"name\": \"Pear\", \"description\": \"Winter fruit\"}")
                 .header("Content-Type", MediaType.APPLICATION_JSON)
                 .when()
-                .delete("/fruits")
+                .delete("/api/public/fruits")
                 .then()
                 .statusCode(200)
                 .body("$.size()", is(2),

@@ -14,7 +14,7 @@ public class LegumeResourceTest {
     @Test
     public void testList() {
         given()
-                .when().get("/legumes")
+                .when().get("/api/public/legumes")
                 .then()
                 .statusCode(200)
                 .body("$.size()", is(2),

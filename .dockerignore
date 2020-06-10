@@ -1,0 +1,6 @@
+# Cf. Dockerfile.multistage 
+# == instruction COPY
+#*
+#!target/*-runner
+#!target/*-runner.jar
+#!target/lib/*

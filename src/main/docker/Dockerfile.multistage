@@ -1,4 +1,8 @@
 ## Stage 1 : build with maven builder image with native capabilities
+FROM quay.io/quarkus/ubi-quarkus-native-image:19.3.1-java11 as nativebuilder
+RUN mkdir -p /tmp/ssl \
+  && cp /opt/graalvm/lib/security/cacerts /tmp/ssl/
+  
 FROM quay.io/quarkus/centos-quarkus-maven:19.3.1-java11 AS build
 RUN mkdir -p /tmp/ssl \
   && cp /opt/graalvm/lib/security/cacerts /tmp/ssl/
@@ -13,7 +17,7 @@ RUN mvn -f /usr/src/app/pom.xml -Pnative clean package
 ## Stage 2 : create the docker final image
 FROM registry.access.redhat.com/ubi8/ubi-minimal
 WORKDIR /work/
-COPY --from=build /tmp/ssl/ /work/
+COPY --from=nativebuilder /tmp/ssl/ /work/
 COPY --from=build /usr/src/app/target/*-runner /work/application
 
 # set up permissions for user `1001`

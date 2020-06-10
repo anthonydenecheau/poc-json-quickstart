@@ -1,6 +1,5 @@
 #Fichier de config CloudBuild
 steps:
-steps:
 - name: 'gcr.io/cloud-builders/mvn'
   args: ['install']
 # Build the container image

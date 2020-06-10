@@ -6,12 +6,16 @@ import org.keycloak.representations.AccessTokenResponse;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import javax.ws.rs.core.MediaType;
 
 @ExtendWith(KeycloakServer.class)
 @QuarkusTest
 public class PolicyEnforcerTest {
 
+/*
     private static final String KEYCLOAK_SERVER_URL = System.getProperty("keycloak.url", "http://localhost:8180/auth");
     private static final String KEYCLOAK_REALM = "quarkus";
 
@@ -63,7 +67,7 @@ public class PolicyEnforcerTest {
                 .post(KEYCLOAK_SERVER_URL + "/realms/" + KEYCLOAK_REALM + "/protocol/openid-connect/token")
                 .as(AccessTokenResponse.class).getToken();
     }
-
+*/
 /*
     @Test
     public void testListFruits() {

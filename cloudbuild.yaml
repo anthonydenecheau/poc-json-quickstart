@@ -1,7 +1,7 @@
 #Fichier de config CloudBuild
 steps:
-#- name: 'gcr.io/cloud-builders/mvn'
-#  args: ['install']
+- name: 'gcr.io/cloud-builders/mvn'
+  args: ['install']
 # Build the container image
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'build', '-f', 'src/main/docker/Dockerfile.multistage', '-t', 'gcr.io/$PROJECT_ID/poc-json-quickstart', '.' ]

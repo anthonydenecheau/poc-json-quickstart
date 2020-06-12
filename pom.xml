@@ -93,8 +93,8 @@
           </execution>
         </executions>
       </plugin>
-		<plugin>
-			<!-- Automatically start PostgreSQL for integration testing - requires Docker -->
+		<!-- Automatically start PostgreSQL for integration testing - requires Docker -->
+		<!--plugin>
 			<groupId>io.fabric8</groupId>
 			<artifactId>docker-maven-plugin</artifactId>
 			<version>${docker-plugin.version}</version>
@@ -148,7 +148,7 @@
 					</goals>
 				</execution>
 			</executions>
-		</plugin>
+		</plugin-->
     </plugins>
   </build>
   <profiles>

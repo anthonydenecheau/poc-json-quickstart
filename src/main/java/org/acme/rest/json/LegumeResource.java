@@ -11,7 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/api/public/legumes")
+@Path("/api/legumes")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class LegumeResource {
@@ -24,7 +24,10 @@ public class LegumeResource {
     }
 
     @GET
+    @Path("/findAll")	
     public Response list() {
+        legumes.add(new Legume("Carrot", "Root vegetable, usually orange"));
+        legumes.add(new Legume("Zucchini", "Summer squash"));
         return Response.ok(legumes).build();
     }
 }

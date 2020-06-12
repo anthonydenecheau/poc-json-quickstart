@@ -25,6 +25,7 @@ public class FruitResource {
     }
 
     @GET
+    @Path("/findAll")
     public Set<Fruit> list() {
         return fruits;
     }

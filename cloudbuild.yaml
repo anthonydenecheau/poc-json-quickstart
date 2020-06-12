@@ -10,7 +10,8 @@ steps:
   args: ['push', 'gcr.io/$PROJECT_ID/poc-json-quickstart']
 # Deploy container image to Cloud Run
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['run', 'deploy', 'ws-pedigree-service', '--image', 'gcr.io/$PROJECT_ID/poc-json-quickstart', '--region', 'europe-west1', '--platform', 'managed', '--set-cloudsql-instances','rugged-shuttle-277619:europe-west1:openid-db-88a629ad','--allow-unauthenticated']
+# '--set-cloudsql-instances','rugged-shuttle-277619:europe-west1:openid-db-88a629ad',
+  args: ['run', 'deploy', 'ws-pedigree-service', '--image', 'gcr.io/$PROJECT_ID/poc-json-quickstart', '--region', 'europe-west1', '--platform', 'managed', '--allow-unauthenticated']
 images:
 - 'gcr.io/$PROJECT_ID/poc-json-quickstart'
 options:

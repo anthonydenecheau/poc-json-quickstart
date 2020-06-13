@@ -3,9 +3,9 @@ steps:
 - name: 'gcr.io/cloud-builders/mvn'
   args: ['install']
 # Get credentials
-#- name: gcr.io/cloud-builders/gcloud
-#  entrypoint: 'bash'
-#  args: [ '-c', 'gcloud secrets versions access latest --secret=ws-openid-enc > ws-openid.json' ]  
+- name: gcr.io/cloud-builders/gcloud
+  entrypoint: 'bash'
+  args: [ '-c', 'gcloud secrets versions access latest --secret=ws-openid-enc > ws-openid.json' ]  
 # Build the container image
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'build', '-f', 'src/main/docker/Dockerfile.multistage', '-t', 'gcr.io/$PROJECT_ID/poc-json-quickstart', '.' ]

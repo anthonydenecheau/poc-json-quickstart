@@ -20,7 +20,10 @@ RUN mvn -f /usr/src/app/pom.xml -Pnative clean package -DskipTests=true
 FROM registry.access.redhat.com/ubi8/ubi-minimal
 
 ADD https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 /usr/local/bin/cloud_sql_proxy
-RUN chmod +x /usr/local/bin/cloud_sql_proxy
+RUN chmod 775 /usr/local/bin/cloud_sql_proxy \
+  && chown 1001 /usr/local/bin/cloud_sql_proxy \
+  && chmod "g+rwX" /usr/local/bin/cloud_sql_proxy \
+  && chown 1001:root /usr/local/bin/cloud_sql_proxy
 
 WORKDIR /work/
 COPY --from=nativebuilder /tmp/ssl/ /work/

@@ -32,4 +32,4 @@ EXPOSE 8080
 USER 1001
 #ENV DISABLE_SIGNAL_HANDLERS true
 #CMD ["./application", "-Dquarkus.http.host=0.0.0.0", "-Djavax.net.ssl.trustStore=/work/cacerts"]
-CMD ["./work/application", "-Dquarkus.http.host=0.0.0.0"]
+CMD ["./application", "-Dquarkus.http.host=0.0.0.0"]

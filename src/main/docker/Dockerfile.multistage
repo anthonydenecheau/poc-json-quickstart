@@ -35,7 +35,7 @@ RUN chmod 775 /work /work/application /work/run.sh \
   && chown -R 1001:root /work
 
 USER 1001
-#EXPOSE $PORT
+EXPOSE $PORT
 CMD ["./run.sh"]
 
 #EXPOSE 8080

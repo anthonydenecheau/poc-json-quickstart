@@ -7,4 +7,4 @@
 sleep 10
 
 # Start the server
-./application -Dquarkus.http.host=0.0.0.0 -Dquarkus.http.port=$PORT
+./application -Dquarkus.http.host=0.0.0.0 -Dquarkus.http.port=$PORT -Djavax.net.ssl.trustStore=/work/cacerts

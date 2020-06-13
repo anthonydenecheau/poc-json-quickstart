@@ -1,12 +1,12 @@
 ## Stage 1 : build with maven builder image with native capabilities
-FROM quay.io/quarkus/ubi-quarkus-native-image:19.3.1-java11 as nativebuilder
-RUN mkdir -p /tmp/ssl \
-  && cp /opt/graalvm/lib/security/cacerts /tmp/ssl/
+#FROM quay.io/quarkus/ubi-quarkus-native-image:19.3.1-java11 as nativebuilder
+#RUN mkdir -p /tmp/ssl \
+#  && cp /opt/graalvm/lib/security/cacerts /tmp/ssl/
   
 FROM quay.io/quarkus/centos-quarkus-maven:19.3.1-java11 AS build
 RUN mkdir -p /tmp/ssl \
   && cp /opt/graalvm/lib/security/cacerts /tmp/ssl/
-COPY ws-openid.json /usr/src/app/
+#COPY ws-openid.json /usr/src/app/
 COPY pom.xml /usr/src/app/
 RUN mvn -f /usr/src/app/pom.xml -B de.qaware.maven:go-offline-maven-plugin:1.2.5:resolve-dependencies
 COPY src /usr/src/app/src
@@ -18,9 +18,9 @@ RUN mvn -f /usr/src/app/pom.xml -Pnative clean package -DskipTests=true
 ## Stage 2 : create the docker final image
 FROM registry.access.redhat.com/ubi8/ubi-minimal
 WORKDIR /work/
-COPY --from=nativebuilder /tmp/ssl/ /work/
+#COPY --from=nativebuilder /tmp/ssl/ /work/
 COPY --from=build /usr/src/app/target/*-runner /work/application
-COPY --from=build /usr/src/app/ws-openid.json /work/application
+#COPY --from=build /usr/src/app/ws-openid.json /work/application
 
 # set up permissions for user `1001`
 RUN chmod 775 /work /work/application \
@@ -30,5 +30,6 @@ RUN chmod 775 /work /work/application \
 
 EXPOSE 8080
 USER 1001
-ENV DISABLE_SIGNAL_HANDLERS true
-CMD ["./application", "-Dquarkus.http.host=0.0.0.0", "-Djavax.net.ssl.trustStore=/work/cacerts"]
+#ENV DISABLE_SIGNAL_HANDLERS true
+#CMD ["./application", "-Dquarkus.http.host=0.0.0.0", "-Djavax.net.ssl.trustStore=/work/cacerts"]
+CMD ["./work/application", "-Dquarkus.http.host=0.0.0.0"]

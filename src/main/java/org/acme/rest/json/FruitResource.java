@@ -16,23 +16,24 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
-import javax.ws.rs.PathParam
+
+import org.jboss.resteasy.annotations.jaxrs.PathParam;
+
 import io.quarkus.panache.common.Sort;
 
-@Path("/api/public/fruits")
+@Path("/api/fruits")
 @ApplicationScoped
 @Produces("application/json")
 @Consumes("application/json")
 public class FruitResource {
 
     @GET
-    @Path("/findAll")	
     public List<Fruit> get() {
         return Fruit.listAll(Sort.by("name"));
     }
 
     @GET
-    @Path("{id}")
+    @Path("/{id}")
     public Fruit getSingle(@PathParam Long id) {
         Fruit entity = Fruit.findById(id);
         if (entity == null) {
@@ -53,7 +54,7 @@ public class FruitResource {
     }
 
     @PUT
-    @Path("{id}")
+    @Path("/{id}")
     @Transactional
     public Fruit update(@PathParam Long id, Fruit fruit) {
         if (fruit.name == null) {
@@ -72,7 +73,7 @@ public class FruitResource {
     }
 
     @DELETE
-    @Path("{id}")
+    @Path("/{id}")
     @Transactional
     public Response delete(@PathParam Long id) {
         Fruit entity = Fruit.findById(id);

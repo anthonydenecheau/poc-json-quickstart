@@ -13,10 +13,10 @@
     <quarkus.platform.version>1.5.1.Final</quarkus.platform.version>
 	<testcontainers.version>1.14.1</testcontainers.version>
     <surefire-plugin.version>2.22.1</surefire-plugin.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<compiler-plugin.version>3.8.0</compiler-plugin.version>
 	<docker-plugin.version>0.28.0</docker-plugin.version>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
   <dependencyManagement>
@@ -80,28 +80,39 @@
   </dependencies>
   <build>
     <plugins>
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>${surefire-plugin.version}</version>
-        <configuration>
-          <systemPropertyVariables>
-            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-            <maven.home>${maven.home}</maven.home>
-          </systemPropertyVariables>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-maven-plugin</artifactId>
-        <version>${quarkus-plugin.version}</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>build</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>${compiler-plugin.version}</version>
+			<configuration>
+				<source>1.8</source>
+				<target>1.8</target>
+				<!-- the parameters=true option is critical so that RESTEasy works fine -->
+				<parameters>true</parameters>
+			</configuration>
+		</plugin>
+		<plugin>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<version>${surefire-plugin.version}</version>
+			<configuration>
+			  <systemPropertyVariables>
+				<java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+				<maven.home>${maven.home}</maven.home>
+			  </systemPropertyVariables>
+			</configuration>
+		</plugin>
+		<plugin>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-maven-plugin</artifactId>
+			<version>${quarkus-plugin.version}</version>
+			<executions>
+			  <execution>
+				<goals>
+				  <goal>build</goal>
+				</goals>
+			  </execution>
+			</executions>
+		</plugin>
 		<!-- Automatically start PostgreSQL for integration testing - requires Docker -->
 		<!--plugin>
 			<groupId>io.fabric8</groupId>

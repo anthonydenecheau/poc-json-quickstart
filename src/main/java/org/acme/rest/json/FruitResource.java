@@ -16,12 +16,10 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
-
-import org.jboss.resteasy.annotations.jaxrs.PathParam;
-
+import javax.ws.rs.PathParam
 import io.quarkus.panache.common.Sort;
 
-@Path("/api/fruits")
+@Path("/api/public/fruits")
 @ApplicationScoped
 @Produces("application/json")
 @Consumes("application/json")
